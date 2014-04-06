@@ -16,7 +16,6 @@ apt-get install zsh vim htop lsof # good call on these, grugq. strace included i
 apt-get install tor dnsmasq
 
 cp /etc/network/interfaces /etc/network/interfaces-bak
-
 cat > /etc/network/interfaces << __INTERFACES__
 auto lo
 
@@ -90,7 +89,7 @@ COMMIT
 COMMIT
 __IPTABLES__
 
-/etc/init.d/tor start
+/etc/init.d/tor restart
 
 # make sure all is gravy. If tor throws errors, either you or I did something wrong.
 # if not, reboot and enjoy.
