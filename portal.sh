@@ -1,18 +1,18 @@
 #!/bin/bash
 #
-# PORTALofRaspian
+# PORTALofRaspbian
 # Licensed GPLv3
 #
 # Essentially just took the PORTAL for Debian from www.rednerd.com
-# and switched some shit around to make it work for Raspian, as my
+# and switched some shit around to make it work for Raspbian, as my
 # Alfa model is being totally rude to Arch on Pi, unfortunately.
 #
-# After the sript runs, do whatever you gotta do and reboot. Jah bless.
+# After the script runs, do whatever you gotta do and reboot. Jah bless.
 #
 # 99.99% credits to grugq and rednerd
 #
 
-apt-get install zsh vim htop lsof # good call on these, grugq. strace included in raspian. I prefer http://ohmyz.sh/ ;)
+apt-get install zsh vim htop lsof # good call on these, grugq. strace included in raspbian. I prefer http://ohmyz.sh/ ;)
 apt-get install tor dnsmasq
 
 cp /etc/network/interfaces /etc/network/interfaces-bak
@@ -23,7 +23,7 @@ iface lo inet loopback
 
 pre-up ifconfig wlan0 hw ether 00:00:00:00:00:00 # change wlan0's mac address
 allow-hotplug wlan0
-iface wlan0 inet manual
+iface wlan0 inet manual # set to manual by default, change to auto if you already have AP's setup.
 wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface default inet dhcp
 
