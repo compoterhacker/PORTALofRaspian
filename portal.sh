@@ -32,7 +32,7 @@ echo -e "\n"
 
 case $allow_spoof in
   [nN] ) echo "[+] Defaulting to wlan0's real MAC."
-         macaddress=$(ip link show eth0 | awk '/ether/ {print $2}')
+         macaddress=$(ip link show wlan0 | awk '/ether/ {print $2}')
          ;;
   *) macaddress=$(echo -n 00:18:4D; dd bs=1 count=3 if=/dev/random 2>/dev/null |hexdump -v -e '/1 ":%02X"')
      echo "[+] Generated random Netgear MAC address for wlan0: $macaddress"
