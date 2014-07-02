@@ -20,8 +20,8 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 echo "[+] Installing necessary goods"
-apt-get install zsh vim htop lsof # good call on these, grugq. strace included in raspbian. I prefer http://ohmyz.sh/ ;)
-apt-get install tor dnsmasq
+apt-get -y -qq install zsh vim htop lsof tor dnsmasq &> /dev/null
+	if [ $? -eq 0 ]; then echo "OK"; else echo "Failed"; exit 1; fi
 
 echo "[+] Creating backup of /etc/network/interfaces -> interfaces-bak"
 cp /etc/network/interfaces /etc/network/interfaces-bak
@@ -47,13 +47,12 @@ iface lo inet loopback
 
 pre-up ifconfig wlan0 hw ether $macaddress
 allow-hotplug wlan0
-iface wlan0 inet manual # set to manual by default, change to auto if you already have AP's setup.
+iface wlan0 inet manual.
 wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface default inet dhcp
 
 auto eth0
 iface eth0 inet static
-  # Comment out the line below, once you have the network working and tor configs
   # pre-up iptables-restore < /etc/network/iptables.tor.rules
   address 172.16.0.1
   network 172.16.0.0
@@ -150,12 +149,11 @@ done < /etc/network/interfaces;
 
 service tor restart
 sleep 1
-service ssh reload
-sleep 1
 
 echo "[+] Setup complete"
-if [ $PISSH != "" ] then;
+if [ $PISSH == *Hidden* ] then;
   echo "[+] Your Pi's SSH onion: $(cat /var/lib/tor/hidden_service/hostname)"
+  service ssh reload
 fi
 echo "[+] Reboot, plug into eth0 and giddyup"
 
