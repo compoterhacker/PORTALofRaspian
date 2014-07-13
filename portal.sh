@@ -62,7 +62,7 @@ __INTERFACES__
 echo "[+] Backing up /etc/tor/torrc -> torrc.bak"
 cp /etc/tor/torrc /etc/tor/torrc.bak
 
-HIDDENSERVICE="[+] Would you like to run your sshd as a hidden service? [Recommended] (Y/n): "
+HIDDENSERVICE="[+] Would you like to run your sshd as a hidden service? (y/N): "
 read -n1 -p "$HIDDENSERVICE" ssh_hs
 echo -e "\n"
 
