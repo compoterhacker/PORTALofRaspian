@@ -67,13 +67,14 @@ read -n1 -p "$HIDDENSERVICE" ssh_hs
 echo -e "\n"
 
 case $ssh_hs in
-  [nN] ) echo "[+] Weaksauce."
+  [yY] ) echo "[+] Adding sshd as a hidden service for your Raspberry Pi"
+         PISSH="HiddenServiceDir /var/lib/tor/hidden_service/
+         HiddenServicePort 22 127.0.0.1:22
+         "
+         ;;
+  *) echo "[+] Weaksauce."
          PISSH=""
          ;;
-  *) echo "[+] Adding sshd as a hidden service for your Raspberry Pi"
-     PISSH="HiddenServiceDir /var/lib/tor/hidden_service/
-     HiddenServicePort 22 127.0.0.1:22
-     "
 
      while read line;
      do
